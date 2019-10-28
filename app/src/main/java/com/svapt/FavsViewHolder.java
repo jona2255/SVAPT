@@ -2,16 +2,13 @@ package com.svapt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class FavsViewHolder extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+        setContentView(R.layout.viewholder_favs);
     }
 }

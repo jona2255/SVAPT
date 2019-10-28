@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">SVAPT</string>
+    <string name="nombre_cancion">Nombre Cancion</string>
+    <string name="nombre_autor">Nombre Autor</string>
+    <string name="_3_15">3:15</string>
+    <string name="menu_depegable">menu depegable</string>
+    <string name="opciones">opciones</string>
+    <string name="carpetas">carpetas</string>
+    <string name="listas_reproduccion">Listas Reproducción</string>
+    <string name="favoritos">favoritos</string>
+    <string name="mas_reproducidos">Mas Reproducidos</string>
+    <string name="title_activity_library">LibraryActivity</string>
+
+    <string name="tab_text_1">Playlists</string>
+    <string name="tab_text_2">Carpetas</string>
+    <string name="tab_text_3">Artistas</string>
+    <string name="tab_text_4">Albums</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
