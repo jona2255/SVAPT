@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder()
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.inicioFragment, R.id.searchFragment, R.id.musicFragment
+        )
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -41,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav_view);
-        NavigationUI.setupWithNavController(bottomNavView, navController);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        NavigationUI.setupWithNavController(bottomNavView,navController);
     }
 
 
