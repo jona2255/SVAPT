@@ -12,7 +12,7 @@
     <fragment
         android:id="@+id/inicioFragment"
         android:name="com.svapt.InicioFragment"
-        android:label="fragment_inicio"
+        android:label="@string/inicio"
         tools:layout="@layout/fragment_inicio" />
     <fragment
         android:id="@+id/musicFragment"
