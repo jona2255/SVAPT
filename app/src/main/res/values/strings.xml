@@ -11,6 +11,7 @@
     <string name="mas_reproducidos">Mas Reproducidos</string>
     <string name="title_activity_library">LibraryActivity</string>
 
+    <string name="tab_text_0">Canciones</string>
     <string name="tab_text_1">Playlists</string>
     <string name="tab_text_2">Carpetas</string>
     <string name="tab_text_3">Artistas</string>

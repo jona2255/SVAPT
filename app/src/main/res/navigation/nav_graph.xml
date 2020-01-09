@@ -24,4 +24,14 @@
         android:name="com.svapt.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/songsFragment"
+        android:name="com.svapt.ui.library.SongsFragment"
+        android:label="fragment_songs"
+        tools:layout="@layout/fragment_songs" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.svapt.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
 </navigation>
