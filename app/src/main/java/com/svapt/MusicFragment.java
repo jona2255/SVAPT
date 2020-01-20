@@ -17,9 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
-import com.svapt.ui.library.AlbumsFragment;
-import com.svapt.ui.library.ArtistasFragment;
-import com.svapt.ui.library.CarpetasFragment;
 import com.svapt.ui.library.PlaylistsFragment;
 import com.svapt.ui.library.SongsFragment;
 
@@ -55,7 +52,7 @@ public class MusicFragment extends Fragment {
     class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         @StringRes
-        private final int[] TAB_TITLES = new int[]{R.string.tab_text_0, R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4};
+        private final int[] TAB_TITLES = new int[]{R.string.tab_text_0, R.string.tab_text_1};
         private final Context mContext;
 
         public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -67,9 +64,6 @@ public class MusicFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position){
                 case 1: return new PlaylistsFragment();
-                case 2: return new CarpetasFragment();
-                case 3: return new ArtistasFragment();
-                case 4: return new AlbumsFragment();
             }
             return new SongsFragment();
         }
@@ -82,7 +76,7 @@ public class MusicFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 5;
+            return 2;
         }
     }
 }

@@ -1,7 +1,5 @@
 package com.svapt;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -9,7 +7,6 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -17,10 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
-import androidx.core.app.CoreComponentFactory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,13 +44,9 @@ public class MainActivity extends AppCompatActivity {
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        final NavigationView navigationView = findViewById(R.id.nav_view);
-
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.inicioFragment, R.id.searchFragment, R.id.musicFragment
+                R.id.inicioFragment, R.id.musicFragment
         )
-                .setDrawerLayout(drawer)
                 .build();
 
 
@@ -65,30 +55,9 @@ public class MainActivity extends AppCompatActivity {
         final BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav_view);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
-        NavigationUI.setupWithNavController(navigationView, navController);
-
         NavigationUI.setupWithNavController(bottomNavView,navController);
 
 
-//         Ocultar la barra de navegaciónl
-
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller,
-                                             @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                switch (destination.getId()){
-                    case R.id.searchFragment: case R.id.helpFragment:
-                        toolbar.setVisibility(View.GONE);
-                        bottomNavView.setVisibility(View.GONE);
-                        navigationView.setVisibility(View.GONE);
-                        break;
-                    default:
-                        toolbar.setVisibility(View.VISIBLE);
-                        bottomNavView.setVisibility(View.VISIBLE);
-                        navigationView.setVisibility(View.GONE);
-                }
-            }
-        });
     }
 
     @Override

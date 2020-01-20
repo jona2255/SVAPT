@@ -6,31 +6,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="#454545"
         android:layout_margin="10dp"
-        android:gravity="center_vertical">
+        android:layout_gravity="center_vertical">
 
 
         <ImageView
             android:id="@+id/imgSong"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/vinyl"
+            android:src="@drawable/vinylo"
             tools:ignore="MissingConstraints" />
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgSong"
-            app:layout_constraintTop_toTopOf="parent">
-
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
 
             <TextView
                 android:id="@+id/title"
@@ -48,15 +47,16 @@
 
         <TextView
             android:id="@+id/duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="3:31"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 

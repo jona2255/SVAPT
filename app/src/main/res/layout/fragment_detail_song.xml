@@ -20,7 +20,7 @@
             android:id="@+id/imgSong"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/vinyl"
+            android:background="@drawable/vinylo"
             tools:ignore="MissingConstraints" />
 
 
