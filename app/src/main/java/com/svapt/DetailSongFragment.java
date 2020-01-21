@@ -40,10 +40,14 @@ public class DetailSongFragment extends Fragment {
             public void onChanged(final Cancion cancion) {
                 if(cancion == null) return;
 
+                int minutes = (cancion.duracion % (1000 * 60 * 60)) / (1000 * 60);
+                int seconds = ((cancion.duracion % (1000 * 60 * 60)) % (1000 * 60) / 1000);
+
                 tituloTextView.setText(cancion.titulo);
                 artistaTextView.setText(cancion.artista);
-                duracionTextView.setText(cancion.duracion);
+                duracionTextView.setText(minutes + ":" + seconds);
             }
         });
     }
+
 }

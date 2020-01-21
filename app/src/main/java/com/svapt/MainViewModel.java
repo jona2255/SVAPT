@@ -2,7 +2,6 @@ package com.svapt;
 
 import android.app.Application;
 import android.content.ContentUris;
-import android.content.MutableContextWrapper;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
