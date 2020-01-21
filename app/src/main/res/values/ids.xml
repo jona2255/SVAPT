@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="lyt_parent" type="id" />
+    <item name="more" type="id" />
+    <item name="brief" type="id" />
+</resources>
