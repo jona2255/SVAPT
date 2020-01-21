@@ -2,6 +2,11 @@ package com.svapt.ui.library;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,16 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
-
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.svapt.Cancion;
@@ -92,7 +90,7 @@ public class SongsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     mainViewModel.establecerCancionSeleccionada(cancion);
-                    navController.navigate(R.id.inicioFragment);
+                    navController.navigate(R.id.parent_view);
                 }
             });
         }
