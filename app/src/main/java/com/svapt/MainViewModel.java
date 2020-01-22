@@ -1,9 +1,7 @@
 package com.svapt;
 
 import android.app.Application;
-import android.content.ContentUris;
 import android.database.Cursor;
-import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -37,11 +35,9 @@ public class MainViewModel extends AndroidViewModel {
         try (Cursor cursor = application.getContentResolver().query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 new String[] { // select
-                        MediaStore.Audio.Media._ID,
                         MediaStore.Audio.Media.DISPLAY_NAME,
                         MediaStore.Audio.Media.DURATION,
                         MediaStore.Audio.Media.ARTIST,
-                        MediaStore.Audio.Media.ALBUM
                 },
                 "",
                 null,
@@ -49,27 +45,30 @@ public class MainViewModel extends AndroidViewModel {
         )) {
             List<Cancion> list = new ArrayList<>();
 
-            int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
             int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME);
             int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
             int artistColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST);
-            int albumColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM);
 
 //            String durStr = dur/60 + ":" + dur%60;
 
             while (cursor.moveToNext()) {
-                long id = cursor.getLong(idColumn);
                 String name = cursor.getString(nameColumn);
                 int duration = cursor.getInt(durationColumn);
                 String artist = cursor.getString(artistColumn);
-                int album = cursor.getInt(albumColumn);
 
 
                 Log.e("ABCD", "name = " + name);
 
-                Uri contentUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
 
-                Cancion cancion = new Cancion(name, artist,duration);
+                int minutes = ((duration % (1000 * 60 * 60)) / (1000 * 60));
+
+                int seconds = ((duration % (1000 * 60 * 60)) % (1000 * 60) / 1000);
+                String secs = String.valueOf(seconds);
+                if (seconds<10) secs = 0 + secs;
+
+                String durationTrans = minutes+":"+secs;
+
+                Cancion cancion = new Cancion(name, artist, durationTrans,duration);
 
                 list.add(cancion);
             }

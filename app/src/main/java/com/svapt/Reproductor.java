@@ -7,17 +7,20 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
-public class Reproductor extends AppCompatActivity {
+public class Reproductor extends Fragment {
 
     private View parent_view;
     private AppCompatSeekBar seek_song_progressbar;
@@ -31,73 +34,17 @@ public class Reproductor extends AppCompatActivity {
     //private SongsManager songManager;
     private MusicUtils utils;
 
+    public Reproductor() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player_music_basic);
-
-        initComponent();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_player_music_basic, container, false);
     }
-
-    private void initComponent() {
-        parent_view = findViewById(R.id.parent_view);
-        seek_song_progressbar = findViewById(R.id.seek_song_progressbar);
-        bt_play = findViewById(R.id.bt_play);
-
-        // set Progress bar values
-        seek_song_progressbar.setProgress(0);
-        seek_song_progressbar.setMax(MusicUtils.MAX_PROGRESS);
-
-        // Media Player
-        mp = new MediaPlayer();
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                // Changing button image to play button
-                bt_play.setImageResource(R.drawable.ic_play_arrow);
-            }
-        });
-
-        try {
-            mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            AssetFileDescriptor afd = getAssets().openFd("short_music.mp3");
-            mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            afd.close();
-            mp.prepare();
-        } catch (Exception e) {
-            Snackbar.make(parent_view, "Cannot load audio file", Snackbar.LENGTH_SHORT).show();
-        }
-
-        utils = new MusicUtils();
-        // Listeners
-        seek_song_progressbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // remove message Handler from updating progress bar
-                mHandler.removeCallbacks(mUpdateTimeTask);
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                mHandler.removeCallbacks(mUpdateTimeTask);
-                int totalDuration = mp.getDuration();
-                int currentPosition = utils.progressToTimer(seekBar.getProgress(), totalDuration);
-
-                // forward or backward to certain seconds
-                mp.seekTo(currentPosition);
-
-                // update timer progress again
-                mHandler.post(mUpdateTimeTask);
-            }
-        });
-        buttonPlayerAction();
-    }
-
     /**
      * Play button click event plays a song and changes button to pause image
      * pauses a song and changes button to play image
@@ -190,15 +137,89 @@ public class Reproductor extends AppCompatActivity {
         mp.release();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        } else {
-            Snackbar.make(parent_view, item.getTitle(), Snackbar.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
+
+    class Rep extends AppCompatActivity{
+
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_player_music_basic);
+
+            initComponent();
+        }
+
+
+        private void initComponent() {
+            parent_view = findViewById(R.id.reproductor);
+            seek_song_progressbar = findViewById(R.id.seek_song_progressbar);
+            bt_play = findViewById(R.id.bt_play);
+
+            // set Progress bar values
+            seek_song_progressbar.setProgress(0);
+            seek_song_progressbar.setMax(MusicUtils.MAX_PROGRESS);
+
+            // Media Player
+            mp = new MediaPlayer();
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // Changing button image to play button
+                    bt_play.setImageResource(R.drawable.ic_play_arrow);
+                }
+            });
+
+            try {
+                mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                AssetFileDescriptor afd = getAssets().openFd("short_music.mp3");
+                mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                afd.close();
+                mp.prepare();
+            } catch (Exception e) {
+                Snackbar.make(parent_view, "Cannot load audio file", Snackbar.LENGTH_SHORT).show();
+            }
+
+            utils = new MusicUtils();
+            // Listeners
+            seek_song_progressbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                    // remove message Handler from updating progress bar
+                    mHandler.removeCallbacks(mUpdateTimeTask);
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    mHandler.removeCallbacks(mUpdateTimeTask);
+                    int totalDuration = mp.getDuration();
+                    int currentPosition = utils.progressToTimer(seekBar.getProgress(), totalDuration);
+
+                    // forward or backward to certain seconds
+                    mp.seekTo(currentPosition);
+
+                    // update timer progress again
+                    mHandler.post(mUpdateTimeTask);
+                }
+            });
+            buttonPlayerAction();
+        }
+
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            if (item.getItemId() == android.R.id.home) {
+                finish();
+            } else {
+                Snackbar.make(parent_view, item.getTitle(), Snackbar.LENGTH_SHORT).show();
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

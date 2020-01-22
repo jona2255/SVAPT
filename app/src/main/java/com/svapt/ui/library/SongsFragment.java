@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.svapt.Cancion;
 import com.svapt.MainViewModel;
 import com.svapt.R;
+import com.svapt.Reproductor;
 
 import java.util.List;
 
@@ -83,14 +84,14 @@ public class SongsFragment extends Fragment {
 
             holder.tituloTextView.setText(cancion.titulo);
             holder.artistaTextView.setText(cancion.artista);
-            holder.duracionTextView.setText(String.valueOf(cancion.duracion));
+            holder.duracionTextView.setText(cancion.duracionTrans);
             Glide.with(requireActivity()).load(R.drawable.vinylo).into(holder.portadaImageView);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mainViewModel.establecerCancionSeleccionada(cancion);
-                    navController.navigate(R.id.parent_view);
+                    navController.navigate(R.id.reproductor);
                 }
             });
         }
