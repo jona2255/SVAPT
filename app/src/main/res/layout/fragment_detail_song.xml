@@ -16,11 +16,11 @@
         android:gravity="center_vertical">
 
 
-        <ImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/imgSong"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/vinylo"
+            android:background="@drawable/vinyl"
             tools:ignore="MissingConstraints" />
 
 

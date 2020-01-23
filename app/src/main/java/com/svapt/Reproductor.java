@@ -129,15 +129,6 @@ public class Reproductor extends Fragment {
         }
     };
 
-    // stop player when destroy
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mHandler.removeCallbacks(mUpdateTimeTask);
-        mp.release();
-    }
-
-
 
     class Rep extends AppCompatActivity{
 

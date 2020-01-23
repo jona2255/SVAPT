@@ -85,7 +85,7 @@ public class SongsFragment extends Fragment {
             holder.tituloTextView.setText(cancion.titulo);
             holder.artistaTextView.setText(cancion.artista);
             holder.duracionTextView.setText(cancion.duracionTrans);
-            Glide.with(requireActivity()).load(R.drawable.vinylo).into(holder.portadaImageView);
+            Glide.with(requireActivity()).load(R.drawable.vinyl).into(holder.portadaImageView);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

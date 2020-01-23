@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -41,7 +40,7 @@ public class MusicFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(requireActivity(), getChildFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         ViewPager viewPager = view.findViewById(R.id.viewPager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = view.findViewById(R.id.tabLayout);
@@ -50,13 +49,8 @@ public class MusicFragment extends Fragment {
 
     class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        @StringRes
-        private final int[] TAB_TITLES = new int[]{R.string.tab_text_0, R.string.tab_text_1};
-        private final Context mContext;
-
-        public SectionsPagerAdapter(Context context, FragmentManager fm) {
-            super(fm);
-            mContext = context;
+         SectionsPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
         }
 
         @Override
@@ -70,7 +64,10 @@ public class MusicFragment extends Fragment {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return mContext.getResources().getString(TAB_TITLES[position]);
+            switch (position){
+                case 1: return "Playlists";
+            }
+            return "Canciones";
         }
 
         @Override

@@ -57,7 +57,7 @@ public class MainViewModel extends AndroidViewModel {
                 String artist = cursor.getString(artistColumn);
 
 
-                Log.e("ABCD", "name = " + name);
+                Log.e("ABCD", "name = " + name + "artist = " + artist);
 
 
                 int minutes = ((duration % (1000 * 60 * 60)) / (1000 * 60));

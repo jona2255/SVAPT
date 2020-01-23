@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1234;
 
     private AppBarConfiguration mAppBarConfiguration;
+    NavController navController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,40 +43,9 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         } else {
-            enter();
+            iniciarApp();
         }
-
 //         Buscador, barra de abajo y menu despegable
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.inicioFragment, R.id.musicFragment
-        )
-                .build();
-
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
-        final BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav_view);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-
-        NavigationUI.setupWithNavController(bottomNavView,navController);
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller,
-                                             @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                switch (destination.getId()){
-                    case R.id.reproductor:
-                        toolbar.setVisibility(View.GONE);
-                        bottomNavView.setVisibility(View.GONE);
-                        break;
-                    default:
-                        toolbar.setVisibility(View.VISIBLE);
-                        bottomNavView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
     }
 
@@ -90,16 +61,45 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    enter();
+                    iniciarApp();
                 } else {
                     finish();
+                    // botonREquest.setVisibiliy(VISIBLE)
                 }
                 return;
             }
         }
     }
 
-    void enter(){
-        Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.inicioFragment);
-    }
+    private void iniciarApp() {
+            final Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            mAppBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.inicioFragment, R.id.musicFragment
+            )
+                    .build();
+
+            navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+            final BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav_view);
+            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+
+            NavigationUI.setupWithNavController(bottomNavView, navController);
+            navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+                @Override
+                public void onDestinationChanged(@NonNull NavController controller,
+                                                 @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                    switch (destination.getId()) {
+                        case R.id.reproductor:
+                            toolbar.setVisibility(View.GONE);
+                            bottomNavView.setVisibility(View.GONE);
+                            break;
+                        default:
+                            toolbar.setVisibility(View.VISIBLE);
+                            bottomNavView.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
 }
