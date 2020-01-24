@@ -1,7 +1,6 @@
 package com.svapt;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,19 +54,17 @@ public class MusicFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
-                case 1: return new PlaylistsFragment();
-            }
-            return new SongsFragment();
+            if (position == 1) {
+                return new PlaylistsFragment();
+            } else return new SongsFragment();
         }
 
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position){
-                case 1: return "Playlists";
-            }
-            return "Canciones";
+            if (position == 1) {
+                return "Playlists";
+            }else return "Canciones";
         }
 
         @Override

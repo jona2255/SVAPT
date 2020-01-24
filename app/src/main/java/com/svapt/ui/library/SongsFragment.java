@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -22,7 +21,6 @@ import com.bumptech.glide.Glide;
 import com.svapt.Cancion;
 import com.svapt.MainViewModel;
 import com.svapt.R;
-import com.svapt.Reproductor;
 
 import java.util.List;
 
@@ -30,10 +28,10 @@ import java.util.List;
 
 public class SongsFragment extends Fragment {
 
-    MainViewModel mainViewModel;
-    NavController navController;
+    private MainViewModel mainViewModel;
+    private NavController navController;
 
-    SongsAdapter songsAdapter;
+    private SongsAdapter songsAdapter;
 
     public SongsFragment() {}
 
@@ -56,12 +54,9 @@ public class SongsFragment extends Fragment {
         songsAdapter = new SongsAdapter();
         cancionesRecyclerView.setAdapter(songsAdapter);
 
-        mainViewModel.obtenerTodasLasCanciones().observe(getViewLifecycleOwner(), new Observer<List<Cancion>>() {
-            @Override
-            public void onChanged(List<Cancion> canciones) {
-                for(Cancion cancion: canciones) {
-                    songsAdapter.establecerListaCanciones(canciones);                }
-            }
+        mainViewModel.obtenerTodasLasCanciones().observe(getViewLifecycleOwner(), canciones -> {
+            for(Cancion cancion: canciones) {
+                songsAdapter.establecerListaCanciones(canciones);                }
         });
     }
 
@@ -87,12 +82,9 @@ public class SongsFragment extends Fragment {
             holder.duracionTextView.setText(cancion.duracionTrans);
             Glide.with(requireActivity()).load(R.drawable.vinyl).into(holder.portadaImageView);
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mainViewModel.establecerCancionSeleccionada(cancion);
-                    navController.navigate(R.id.reproductor);
-                }
+            holder.itemView.setOnClickListener(view -> {
+                mainViewModel.establecerCancionSeleccionada(cancion);
+                navController.navigate(R.id.reproductor);
             });
         }
 
@@ -101,7 +93,7 @@ public class SongsFragment extends Fragment {
             return canciones == null ? 0 : canciones.size();
         }
 
-        public void establecerListaCanciones(List<Cancion> elementos){
+        void establecerListaCanciones(List<Cancion> elementos){
             this.canciones = elementos;
             notifyDataSetChanged();
         }
@@ -110,7 +102,7 @@ public class SongsFragment extends Fragment {
             ImageView portadaImageView;
             TextView tituloTextView, artistaTextView, duracionTextView;
 
-            public SongViewHolder(@NonNull View itemView) {
+            SongViewHolder(@NonNull View itemView) {
                 super(itemView);
                 portadaImageView = itemView.findViewById(R.id.imgSong);
                 tituloTextView = itemView.findViewById(R.id.title);

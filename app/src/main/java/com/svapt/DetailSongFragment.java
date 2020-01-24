@@ -9,14 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 public class DetailSongFragment extends Fragment {
 
-    MainViewModel mainViewModel;
+    private MainViewModel mainViewModel;
 
-    TextView tituloTextView, artistaTextView, duracionTextView;
+    private TextView tituloTextView, artistaTextView, duracionTextView;
 
     public DetailSongFragment() { }
 
@@ -35,15 +34,12 @@ public class DetailSongFragment extends Fragment {
         artistaTextView = view.findViewById(R.id.artist);
         duracionTextView = view.findViewById(R.id.duration);
 
-        mainViewModel.cancionSeleccionada.observe(getViewLifecycleOwner(), new Observer<Cancion>() {
-            @Override
-            public void onChanged(final Cancion cancion) {
-                if(cancion == null) return;
+        mainViewModel.cancionSeleccionada.observe(getViewLifecycleOwner(), cancion -> {
+            if(cancion == null) return;
 
-                tituloTextView.setText(cancion.titulo);
-                artistaTextView.setText(cancion.artista);
-                duracionTextView.setText(cancion.duracionTrans);
-            }
+            tituloTextView.setText(cancion.titulo);
+            artistaTextView.setText(cancion.artista);
+            duracionTextView.setText(cancion.duracionTrans);
         });
     }
 

@@ -28,7 +28,7 @@
             android:layout_marginBottom="120dp"
             android:foreground="@color/overlay_dark_30"
             android:scaleType="centerCrop"
-            android:src="@drawable/photo_singer_male" />
+            android:src="@drawable/img_rep" />
 
 
      <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -59,10 +59,11 @@
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:onClick="controlClick"
+                        android:clickable="true"
                         android:tint="@android:color/white"
                         app:srcCompat="@drawable/ic_repeat"
-                        tools:ignore="VectorDrawableCompat" />
+                        tools:ignore="VectorDrawableCompat"
+                        android:focusable="true" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -93,11 +94,11 @@
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:onClick="controlClick"
+                        android:clickable="true"
                         android:tint="@android:color/white"
                         app:srcCompat="@drawable/ic_shuffle"
                         tools:ignore="VectorDrawableCompat"
-                        android:contentDescription="TODO" />
+                        android:focusable="true" />
 
                 </LinearLayout>
 
@@ -112,10 +113,11 @@
                         android:layout_height="?attr/actionBarSize"
                         android:layout_weight="1"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:onClick="controlClick"
+                        android:clickable="true"
                         android:tint="@android:color/white"
                         app:srcCompat="@drawable/ic_skip_previous"
-                        tools:ignore="VectorDrawableCompat" />
+                        tools:ignore="VectorDrawableCompat"
+                        android:focusable="true" />
 
                     <ImageButton
                         android:id="@+id/bt_play"
@@ -123,9 +125,11 @@
                         android:layout_height="?attr/actionBarSize"
                         android:layout_weight="1"
                         android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
                         android:tint="@android:color/white"
                         app:srcCompat="@drawable/ic_play_arrow"
-                        tools:ignore="VectorDrawableCompat" />
+                        tools:ignore="VectorDrawableCompat"
+                        android:focusable="true" />
 
                     <ImageButton
                         android:id="@+id/bt_next"
@@ -133,10 +137,11 @@
                         android:layout_height="?attr/actionBarSize"
                         android:layout_weight="1"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:onClick="controlClick"
+                        android:clickable="true"
                         android:tint="@android:color/white"
                         app:srcCompat="@drawable/ic_skip_next"
-                        tools:ignore="VectorDrawableCompat" />
+                        tools:ignore="VectorDrawableCompat"
+                        android:focusable="true" />
 
                 </LinearLayout>
 
