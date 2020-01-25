@@ -1,4 +1,4 @@
-package com.svapt;
+package com.svapt.Model;
 
 public class Cancion {
 

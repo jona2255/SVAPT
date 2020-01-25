@@ -1,4 +1,4 @@
-package com.svapt;
+package com.svapt.Controller;
 
 import android.app.Application;
 import android.database.Cursor;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.svapt.Model.Cancion;
 
 import java.util.ArrayList;
 import java.util.List;

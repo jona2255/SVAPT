@@ -1,4 +1,4 @@
-package com.svapt;
+package com.svapt.View;
 
 
 import android.os.Bundle;
@@ -14,8 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.svapt.ui.library.PlaylistsFragment;
-import com.svapt.ui.library.SongsFragment;
+import com.svapt.R;
 
 
 /**

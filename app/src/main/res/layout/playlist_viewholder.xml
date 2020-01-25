@@ -15,7 +15,8 @@
         android:layout_gravity="center_vertical">
 
 
-        <com.mikhaellopez.circularimageview.CircularImageView            android:id="@+id/imgSong"
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/imgSong"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/vinyl"

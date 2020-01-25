@@ -1,4 +1,4 @@
-package com.svapt.ui.library;
+package com.svapt.View;
 
 
 import android.os.Bundle;
@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.svapt.Cancion;
-import com.svapt.MainViewModel;
+import com.svapt.Model.Cancion;
+import com.svapt.Controller.MainViewModel;
 import com.svapt.R;
 
 import java.util.List;

@@ -7,7 +7,7 @@
     android:background="@android:color/black"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".Reproductor">
+    tools:context=".View.Reproductor">
 
 
     <com.google.android.material.appbar.AppBarLayout

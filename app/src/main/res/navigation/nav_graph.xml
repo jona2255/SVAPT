@@ -7,36 +7,28 @@
 
     <fragment
         android:id="@+id/inicioFragment"
-        android:name="com.svapt.InicioFragment"
+        android:name="com.svapt.View.InicioFragment"
         android:label="@string/inicio"
         tools:layout="@layout/fragment_inicio" />
     <fragment
         android:id="@+id/musicFragment"
-        android:name="com.svapt.MusicFragment"
+        android:name="com.svapt.View.MusicFragment"
         android:label="@string/libreria"
         tools:layout="@layout/fragment_music" />
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.svapt.HelpFragment"
+        android:name="com.svapt.View.HelpFragment"
         android:label="@string/ayuda"
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/songsFragment"
-        android:name="com.svapt.ui.library.SongsFragment"
+        android:name="com.svapt.View.SongsFragment"
         android:label="@string/canciones"
         tools:layout="@layout/fragment_songs" />
-    <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.svapt.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+
     <fragment
         android:id="@+id/reproductor"
-        android:name="com.svapt.Reproductor"
+        android:name="com.svapt.View.Reproductor"
         android:label="Reproductor" />
-    <fragment
-        android:id="@+id/reproductorFragment"
-        android:name="com.svapt.ReproductorFragment"
-        android:label="fragment_reproductor"
-        tools:layout="@layout/fragment_reproductor" />
+
 </navigation>
