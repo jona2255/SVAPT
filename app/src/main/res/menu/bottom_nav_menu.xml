@@ -3,11 +3,12 @@
 
     <item
         android:id="@+id/inicioFragment"
-        android:title="INICIO"/>
+        android:title="INICIO"
+        android:icon="@drawable/icono_inicio" />
 
     <item
         android:id="@+id/musicFragment"
-        android:title="MUSIC"/>
-
+        android:title="MUSICA"
+        android:icon="@drawable/icono_musica" />
 
 </menu>

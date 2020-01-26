@@ -1,24 +1,25 @@
 package com.svapt;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.View;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import es.dmoral.toasty.Toasty;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,20 +36,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //         Comprueba que tenga permisos
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-        } else {
-            iniciarApp();
-        }
+        aceptarPermisos();
 //         Buscador, barra de abajo y menu despegable
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
+    }
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -58,15 +64,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    iniciarApp();
-                } else {
-                    finish();
-                    // botonREquest.setVisibiliy(VISIBLE)
-                }
-                return;
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                iniciarApp();
+            } else {
+                Toasty.Config.getInstance()
+                        .apply();
+                Toasty.info(this, "Acepta los Permisos para poder continuar", 200000000, true).show();
+
+                finish();
+                // botonREquest.setVisibiliy(VISIBLE)
             }
         }
     }
@@ -86,20 +94,38 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
             NavigationUI.setupWithNavController(bottomNavView, navController);
-            navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-                @Override
-                public void onDestinationChanged(@NonNull NavController controller,
-                                                 @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                    switch (destination.getId()) {
-                        case R.id.reproductor:
-                            toolbar.setVisibility(View.GONE);
-                            bottomNavView.setVisibility(View.GONE);
-                            break;
-                        default:
-                            toolbar.setVisibility(View.VISIBLE);
-                            bottomNavView.setVisibility(View.VISIBLE);
-                    }
+            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                switch (destination.getId()) {
+                    case R.id.reproductor:
+                        toolbar.setVisibility(View.GONE);
+                        bottomNavView.setVisibility(View.GONE);
+                        break;
+                    case R.id.helpFragment:
+                        toolbar.setVisibility(View.VISIBLE);
+                        bottomNavView.setVisibility(View.GONE);
+                        break;
+                    default:
+                        toolbar.setVisibility(View.VISIBLE);
+                        bottomNavView.setVisibility(View.VISIBLE);
                 }
             });
         }
+
+        void aceptarPermisos(){
+
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+
+            } else {
+                iniciarApp();
+            }
+        }
+
+
 }

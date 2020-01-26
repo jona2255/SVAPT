@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +25,8 @@ import com.svapt.R;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +36,7 @@ public class PlaylistsFragment extends Fragment {
     PlaylistViewModel playlistViewModel;
     NavController navController;
     PlaylistAdapter playlistAdapter;
+    Button newPlaylist;
 
     public PlaylistsFragment() {
         // Required empty public constructor
@@ -60,6 +65,8 @@ public class PlaylistsFragment extends Fragment {
 
         playlistViewModel.listaPlaylist.observe(getViewLifecycleOwner(), elementos -> playlistAdapter.establecerListaPlaylist(elementos));
 
+        newPlaylist = view.findViewById(R.id.new_playlist);
+        newPlaylist.setOnClickListener(v -> Toasty.info(v.getContext(),"Playlist creada",  Toast.LENGTH_LONG, true).show());
     }
 
     public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>{

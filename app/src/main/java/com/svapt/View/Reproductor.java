@@ -39,6 +39,7 @@ public class Reproductor extends Fragment {
         ImageButton prev = view.findViewById(R.id.bt_prev);
         ImageButton next = view.findViewById(R.id.bt_next);
         ImageButton play = view.findViewById(R.id.bt_play);
+
         Toasty.Config.getInstance()
                 .apply();
 
